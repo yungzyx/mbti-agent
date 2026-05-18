@@ -4,7 +4,7 @@ Personality-adaptive coding skill for Claude Code and Codex. `mbti-agent` change
 
 This is not roleplay and not an MBTI test. It is a structured collaboration layer for coding agents. The skill uses cognitive function stacks to decide how an agent should plan, implement, debug, refactor, review, and explain code for a given user style.
 
-![image_alt](https://github.com/yungzyx/mbti-agent/blob/b3f3630c56e5dab36a9d1a10abaea0fd3f691c5b/mbti-agent.PNG)
+![mbti-agent preview](mbti-agent.PNG)
 
 ## Why this is different
 
@@ -104,6 +104,12 @@ mbti-agent/
 ├── README.md                      # installation and project overview
 ├── CONTRIBUTING.md                # open-source contribution guide
 ├── LICENSE.md                     # MIT license
+├── scripts/
+│   └── validate_repo.py           # schema, stack, hygiene, and secret checks
+├── .github/
+│   ├── workflows/validate.yml     # CI validation on push and pull requests
+│   ├── ISSUE_TEMPLATE/            # structured contribution reports
+│   └── pull_request_template.md
 ├── references/                    # one MBTI type per file
 │   ├── INTJ.md  INTP.md  ENTJ.md  ENTP.md
 │   ├── INFJ.md  INFP.md  ENFJ.md  ENFP.md
@@ -138,11 +144,30 @@ Good contributions are:
 
 See `CONTRIBUTING.md` for details.
 
+## Validation
+
+Run the repository validator before opening a pull request:
+
+```bash
+python scripts/validate_repo.py
+```
+
+The validator checks:
+
+- required files and directories
+- `SKILL.md` frontmatter and dispatch sections
+- all 16 type profiles and their cognitive function stacks
+- all overlay files and required sections
+- placeholder/template leftovers
+- obvious secrets, local paths, and private-key patterns
+
+GitHub Actions runs the same check on every push and pull request.
+
 ## Roadmap
 
-- v1.0: Complete all 16 type profiles, overlays, docs, examples, and MIT license
+- v1.0: Complete all 16 type profiles, overlays, docs, examples, MIT license, validation script, and CI
 - v1.1: Add community-calibrated examples for each type and task mode
-- v1.2: Add validation scripts for profile schema consistency
+- v1.2: Expand validation with link checks and profile-length guidance
 - v2.0: Add optional non-MBTI trait mapping for users who prefer Big Five-style dimensions
 - v2.1: Add runtime-specific calibration notes for Claude Code and Codex
 

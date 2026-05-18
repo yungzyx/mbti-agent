@@ -1,0 +1,38 @@
+name: Improve a state overlay
+description: Suggest a change to stuck, rushed, learning, exploring, or fatigued behavior.
+title: "Overlay: improve <overlay> behavior"
+labels: [overlay]
+body:
+  - type: dropdown
+    id: overlay
+    attributes:
+      label: Overlay
+      options:
+        - stuck
+        - rushed
+        - learning
+        - exploring
+        - fatigued
+    validations:
+      required: true
+  - type: textarea
+    id: trigger
+    attributes:
+      label: Activation or combination problem
+      description: Describe when the overlay should activate or how it should combine with a base type.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed behavior change
+      description: Name the behavior dimensions affected and concrete examples.
+    validations:
+      required: true
+  - type: textarea
+    id: test-cases
+    attributes:
+      label: Test cases
+      description: Test with at least two base MBTI types.
+    validations:
+      required: true

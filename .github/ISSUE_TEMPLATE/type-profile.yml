@@ -1,0 +1,70 @@
+name: Improve an MBTI type profile
+description: Suggest a concrete improvement to one type profile.
+title: "Profile: improve <TYPE> behavior for <task mode>"
+labels: [type-profile]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: MBTI type
+      options:
+        - INTJ
+        - INTP
+        - ENTJ
+        - ENTP
+        - INFJ
+        - INFP
+        - ENFJ
+        - ENFP
+        - ISTJ
+        - ISFJ
+        - ESTJ
+        - ESFJ
+        - ISTP
+        - ISFP
+        - ESTP
+        - ESFP
+    validations:
+      required: true
+  - type: dropdown
+    id: task-mode
+    attributes:
+      label: Task mode
+      options:
+        - planning
+        - implementation
+        - debugging
+        - refactoring
+        - code review
+        - explanation
+        - cross-cutting
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current behavior problem
+      description: Describe the profile behavior that feels inaccurate or unhelpful.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed behavior
+      description: Explain the concrete coding-agent behavior you want instead.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Cognitive-function rationale
+      description: Ground the change in the function stack and observable coding behavior, not stereotypes.
+    validations:
+      required: true
+  - type: textarea
+    id: test-prompts
+    attributes:
+      label: Test prompts
+      description: Include prompts that should reveal the improved behavior.
+    validations:
+      required: true

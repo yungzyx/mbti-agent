@@ -6,6 +6,9 @@
 - Include all 16 MBTI type profiles
 - Include five state overlays: stuck, rushed, learning, exploring, fatigued
 - Add examples, test cases, contribution guide, and MIT license
+- Add dependency-free validation script for profile schema, function stacks, overlays, placeholders, and secret hygiene
+- Add GitHub Actions CI so every pull request runs validation
+- Add issue templates and a pull request template for contributor workflow
 
 ## v1.1
 

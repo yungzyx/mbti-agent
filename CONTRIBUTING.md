@@ -60,7 +60,15 @@ Personal experience is useful when translated into observable coding behavior.
 
 ## Testing expectations
 
-Before opening a PR, run a small manual evaluation with at least two task modes. Use prompts from `examples/test-cases.md` or write similar ones.
+Before opening a PR, run the automated validator:
+
+```bash
+python scripts/validate_repo.py
+```
+
+The validator checks required files, profile sections, function stacks, overlays, placeholder leftovers, and obvious secret patterns. GitHub Actions runs the same command on pull requests.
+
+For behavior changes, also run a small manual evaluation with at least two task modes. Use prompts from `examples/test-cases.md` or write similar ones.
 
 Minimum for a type-profile change:
 

@@ -1,0 +1,39 @@
+name: Report behavior that does not match the skill
+description: Report a case where mbti-agent changes only tone, ignores overrides, or otherwise misbehaves.
+title: "Behavior bug: <short summary>"
+labels: [behavior-bug]
+body:
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt used
+      description: Paste the prompt or summarize the interaction.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Agent runtime
+      placeholder: Claude Code, Codex, Hermes, other
+    validations:
+      required: true
+  - type: input
+    id: type-overlay
+    attributes:
+      label: Active type and overlay
+      placeholder: INTP + stuck
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected workflow behavior
+      description: Describe behavior dimensions, not tone only.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
