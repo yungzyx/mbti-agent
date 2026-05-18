@@ -4,6 +4,8 @@ Personality-adaptive coding skill for Claude Code and Codex. `mbti-agent` change
 
 This is not roleplay and not an MBTI test. It is a structured collaboration layer for coding agents. The skill uses cognitive function stacks to decide how an agent should plan, implement, debug, refactor, review, and explain code for a given user style.
 
+![image_alt](https://github.com/yungzyx/mbti-agent/blob/b3f3630c56e5dab36a9d1a10abaea0fd3f691c5b/mbti-agent.PNG)
+
 ## Why this is different
 
 Most personality prompts change tone. `mbti-agent` changes workflow. A type profile can cause the agent to:
