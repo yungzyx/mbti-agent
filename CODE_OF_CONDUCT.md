@@ -15,6 +15,8 @@ Unhelpful contributions include:
 - arguing that one type is better than another
 - using MBTI as diagnosis or identity judgment
 - adding roleplay or horoscope-like language
+- implying official affiliation, certification, sponsorship, or endorsement
+- posting proprietary assessment content or brand assets
 - dismissing user preferences because of a type label
 
 Maintainers may close issues or pull requests that repeatedly violate these expectations.

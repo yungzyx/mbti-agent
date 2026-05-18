@@ -18,5 +18,5 @@ Project default:
 ```markdown
 ## Collaboration style
 
-Use the mbti-agent skill with INTJ as my default MBTI type unless I override it.
+Use the mbti-agent skill with INTJ as my default type profile unless I override it.
 ```

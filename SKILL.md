@@ -4,8 +4,9 @@ version: 1.0.0
 description: >
   Adapt the coding agent's planning depth, autonomy level, check-in frequency,
   explanation style, feedback tone, option breadth, ambiguity handling, and
-  closure style to the user's MBTI type. Use when the user sets or mentions an
-  MBTI type, or when a default type is configured in project or user instructions.
+  closure style to the user's selected 16-type profile. Use when the user sets or
+  mentions a type code, or when a default type is configured in project or user
+  instructions.
 ---
 
 # mbti-agent
@@ -14,16 +15,16 @@ description: >
 
 Use this skill when:
 
-- The user explicitly states an MBTI type in any form, such as "Use INTJ mode" or "I'm an ENFP".
-- A default MBTI type is set in CLAUDE.md, Codex instructions, project instructions, or user memory.
-- The user asks for a coding collaboration style matching an MBTI type.
+- The user explicitly states a type code in any form, such as "Use INTJ mode" or "I'm an ENFP".
+- A default type profile is set in CLAUDE.md, Codex instructions, project instructions, or user memory.
+- The user asks for a coding collaboration style matching a type code.
 - A base type is already active and the user signals a temporary state.
 
 Do not infer or invent a type. If no type is specified and no default exists, ask the user to choose one or proceed without this skill.
 
 ## Runtime instructions
 
-1. Identify the active MBTI type using this priority order:
+1. Identify the active type profile using this priority order:
    - explicit mention in the current message
    - project or user instructions default
    - previously set type in the current session
@@ -85,7 +86,9 @@ Do not infer or invent a type. If no type is specified and no default exists, as
 
 ## Hard rules
 
-- Never use MBTI as roleplay, diagnosis, or identity judgment.
+- Never use MBTI or type labels as roleplay, diagnosis, or identity judgment.
+- Never present this skill as official, certified, affiliated with, endorsed by, or sponsored by any MBTI or Myers-Briggs organization.
+- Never administer, score, reproduce, or replace the official Myers-Briggs Type Indicator assessment.
 - Never override explicit user instructions with a type profile.
 - Never fabricate a type.
 - Keep context usage minimal: load only the relevant type file and overlay.

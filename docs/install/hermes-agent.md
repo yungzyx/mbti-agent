@@ -40,7 +40,7 @@ Add this to a project instruction file such as `CLAUDE.md`, `AGENTS.md`, or anot
 ```markdown
 ## Collaboration style
 
-Use the mbti-agent skill with ENFP as my default MBTI type unless I override it. Apply state overlays such as stuck, rushed, learning, exploring, or fatigued when I mention those states.
+Use the mbti-agent skill with ENFP as my default type profile unless I override it. Apply state overlays such as stuck, rushed, learning, exploring, or fatigued when I mention those states.
 ```
 
 ## Verify

@@ -21,6 +21,10 @@ Do not commit:
 
 The repository validator checks for common secret and local-path patterns, but it is best-effort only. GitHub secret scanning and human review are still important.
 
+## Trademark and proprietary material hygiene
+
+Do not commit official assessment questions, scoring rules, report text, training materials, logos, screenshots, or other proprietary materials from third-party personality assessment providers. This repository must stay independent, unofficial, and limited to user-selected coding collaboration preferences.
+
 ## Agent safety
 
 `mbti-agent` must never weaken correctness, safety, repository instructions, or policy compliance. Type profiles adapt workflow behavior; they do not override explicit user instructions or safe engineering practice.

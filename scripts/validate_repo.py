@@ -51,9 +51,19 @@ REQUIRED_EXAMPLES = [
 ]
 
 REQUIRED_TRUST_FILES = [
+    "NOTICE.md",
     "SECURITY.md",
     "CODE_OF_CONDUCT.md",
     "CHANGELOG.md",
+]
+
+TRADEMARK_SAFETY_PHRASES = [
+    "independent and unofficial",
+    "not affiliated with",
+    "not affiliated with, endorsed by, certified by, sponsored by, or approved by",
+    "does not provide, sell, administer, score, reproduce, or replace",
+    "Myers-Briggs Type Indicator",
+    "trademarks of their respective owners",
 ]
 
 MIN_BEHAVIORAL_FIXTURES = 6
@@ -271,6 +281,30 @@ def iter_repo_text_files() -> list[Path]:
     return paths
 
 
+def check_trademark_safety(errors: list[str]) -> None:
+    notice_path = ROOT / "NOTICE.md"
+    readme_path = ROOT / "README.md"
+    skill_path = ROOT / "SKILL.md"
+
+    if notice_path.is_file():
+        notice = text(notice_path)
+        for phrase in TRADEMARK_SAFETY_PHRASES:
+            if phrase not in notice:
+                fail(errors, f"NOTICE.md missing trademark-safety phrase: {phrase!r}")
+
+    if readme_path.is_file():
+        readme = text(readme_path)
+        for phrase in ["## Unofficial project and trademark notice", "not affiliated with", "See `NOTICE.md`"]:
+            if phrase not in readme:
+                fail(errors, f"README.md missing visible trademark disclaimer phrase: {phrase!r}")
+
+    if skill_path.is_file():
+        skill = text(skill_path)
+        for phrase in ["Never present this skill as official", "Never administer, score, reproduce, or replace"]:
+            if phrase not in skill:
+                fail(errors, f"SKILL.md missing runtime trademark-safety rule: {phrase!r}")
+
+
 def check_sensitive_content(errors: list[str]) -> None:
     for path in iter_repo_text_files():
         content = text(path)
@@ -298,6 +332,7 @@ def main() -> int:
     check_type_profiles(errors)
     check_overlays(errors)
     check_behavioral_fixtures(errors)
+    check_trademark_safety(errors)
     check_sensitive_content(errors)
     check_placeholders(errors)
 
@@ -309,7 +344,7 @@ def main() -> int:
 
     fixture_count = len([path for path in (ROOT / "tests" / "fixtures").glob("*.md") if path.name != "README.md"])
     print("mbti-agent validation passed")
-    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, {fixture_count} behavioral fixtures, and repository hygiene checks")
+    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, {fixture_count} behavioral fixtures, trademark safeguards, and repository hygiene checks")
     return 0
 
 

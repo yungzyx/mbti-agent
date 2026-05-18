@@ -1,10 +1,14 @@
 # mbti-agent
 
-Personality-adaptive coding skill for Claude Code, Codex, Hermes Agent, and OpenClaw. `mbti-agent` changes real agent workflow behavior based on the user's MBTI type: planning depth, autonomy level, check-in frequency, explanation depth, feedback style, option breadth, ambiguity handling, and closure style.
+Unofficial 16-type coding-collaboration skill for Claude Code, Codex, Hermes Agent, and OpenClaw. `mbti-agent` changes real agent workflow behavior based on a user-selected type code: planning depth, autonomy level, check-in frequency, explanation depth, feedback style, option breadth, ambiguity handling, and closure style.
 
-This is not roleplay and not an MBTI test. It is a structured collaboration layer for coding agents. The skill uses cognitive function stacks to decide how an agent should plan, implement, debug, refactor, review, and explain code for a given user style.
+This is not roleplay and not a personality test. It is a structured collaboration layer for coding agents. The skill uses cognitive function stacks to decide how an agent should plan, implement, debug, refactor, review, and explain code for a given user style.
 
 ![mbti-agent preview](mbti-agent.PNG)
+
+## Unofficial project and trademark notice
+
+This project is independent and unofficial. It is not affiliated with, endorsed by, certified by, sponsored by, or approved by The Myers-Briggs Company, The Myers & Briggs Foundation, or any MBTI certification or assessment provider. `MBTI` and `Myers-Briggs Type Indicator` are trademarks of their respective owners. This repository does not provide, sell, administer, score, reproduce, or replace the official Myers-Briggs Type Indicator assessment. See `NOTICE.md` for the full disclaimer.
 
 ## Why this is different
 
@@ -16,7 +20,7 @@ Most personality prompts change tone. `mbti-agent` changes workflow. A type prof
 - explain through first principles, examples, user impact, or a concise checklist
 - handle ambiguity by resolving it quickly, exploring it, or grounding it in precedent
 
-Each MBTI type is grounded in its cognitive function stack and includes an inferior-function stress signal. State overlays modify behavior when the user is stuck, rushed, learning, exploring, or fatigued.
+Each 16-type profile is grounded in its cognitive function stack and includes an inferior-function stress signal. State overlays modify behavior when the user is stuck, rushed, learning, exploring, or fatigued.
 
 ## Installation in Claude Code
 
@@ -100,14 +104,14 @@ git clone https://github.com/yungzyx/mbti-agent.git .openclaw/skills/mbti-agent
 
 See `docs/install/openclaw.md` for configuration notes across different OpenClaw setups.
 
-## Set a default MBTI type
+## Set a default type profile
 
 Add a short instruction to your user or project memory file. For Claude Code, this is commonly `CLAUDE.md`:
 
 ```markdown
 ## Collaboration style
 
-Use the mbti-agent skill with ENFP as my default MBTI type unless I override it.
+Use the mbti-agent skill with ENFP as my default type profile unless I override it.
 ```
 
 For Codex or other agents, put the same instruction in the relevant project instructions file or initial prompt.
@@ -139,6 +143,7 @@ mbti-agent/
 ├── MBTI_AGENT_SKILL.md            # human-facing master specification
 ├── README.md                      # installation and project overview
 ├── CONTRIBUTING.md                # open-source contribution guide
+├── NOTICE.md                      # trademark and unofficial-project disclaimer
 ├── SECURITY.md                    # privacy and secret-reporting policy
 ├── CODE_OF_CONDUCT.md             # contribution behavior expectations
 ├── CHANGELOG.md                   # release history and unreleased changes
@@ -149,7 +154,7 @@ mbti-agent/
 │   ├── workflows/validate.yml     # CI validation on push and pull requests
 │   ├── ISSUE_TEMPLATE/            # structured contribution reports
 │   └── pull_request_template.md
-├── references/                    # one MBTI type per file
+├── references/                    # one 16-type profile per file
 │   ├── INTJ.md  INTP.md  ENTJ.md  ENTP.md
 │   ├── INFJ.md  INFP.md  ENFJ.md  ENFP.md
 │   ├── ISTJ.md  ISFJ.md  ESTJ.md  ESFJ.md
@@ -214,7 +219,7 @@ GitHub Actions runs the same check on every push and pull request.
 - v1.0: Complete all 16 type profiles, overlays, docs, examples, MIT license, validation script, CI, and behavioral fixtures
 - v1.1: Add community-calibrated examples for each type and task mode
 - v1.2: Expand validation with link checks, profile-length guidance, and fixture coverage scoring
-- v2.0: Add optional non-MBTI trait mapping for users who prefer Big Five-style dimensions
+- v2.0: Add optional non-type-code trait mapping for users who prefer Big Five-style dimensions
 - v2.1: Add deeper runtime-specific calibration notes for Claude Code, Codex, Hermes Agent, and OpenClaw
 
 ## License

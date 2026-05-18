@@ -109,6 +109,12 @@ In the PR body, include:
 - Say "compare two architecture options" instead of "be analytical."
 - Keep type files parallel in structure so diffs are easy to review.
 
+## Trademark and affiliation safety
+
+This project is independent and unofficial. Contributions must not imply affiliation with, endorsement by, certification by, sponsorship by, or approval from The Myers-Briggs Company, The Myers & Briggs Foundation, or any MBTI certification or assessment provider.
+
+Do not contribute official assessment questions, scoring rules, report text, training materials, logos, screenshots, or proprietary materials. Keep type labels framed as user-selected coding collaboration preferences, not as an official assessment result.
+
 ## Safety and scope
 
 `mbti-agent` should never claim that MBTI determines ability, identity, or value. It is a user-controlled collaboration preference layer. Users can override or disable it at any time.
