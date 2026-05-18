@@ -1,6 +1,6 @@
 # mbti-agent
 
-Personality-adaptive coding skill for Claude Code and Codex. `mbti-agent` changes real agent workflow behavior based on the user's MBTI type: planning depth, autonomy level, check-in frequency, explanation depth, feedback style, option breadth, ambiguity handling, and closure style.
+Personality-adaptive coding skill for Claude Code, Codex, Hermes Agent, and OpenClaw. `mbti-agent` changes real agent workflow behavior based on the user's MBTI type: planning depth, autonomy level, check-in frequency, explanation depth, feedback style, option breadth, ambiguity handling, and closure style.
 
 This is not roleplay and not an MBTI test. It is a structured collaboration layer for coding agents. The skill uses cognitive function stacks to decide how an agent should plan, implement, debug, refactor, review, and explain code for a given user style.
 
@@ -64,6 +64,42 @@ Then invoke it in a prompt:
 Use the mbti-agent skill. My type is INTP. Help me debug this failing test.
 ```
 
+## Installation in Hermes Agent
+
+Install the repository as a local Hermes skill:
+
+```bash
+git clone https://github.com/yungzyx/mbti-agent.git ~/.hermes/skills/mbti-agent
+hermes skills list
+```
+
+If Hermes is already running, use `/reload-skills` and then start a fresh session with `/reset`.
+
+Then invoke it naturally:
+
+```text
+Use the mbti-agent skill with ISTJ as my default coding collaboration style.
+```
+
+See `docs/install/hermes-agent.md` for profile-specific installation and project configuration.
+
+## Installation in OpenClaw
+
+For OpenClaw setups that load local `SKILL.md`-style skills, install the repository as a local skill:
+
+```bash
+git clone https://github.com/yungzyx/mbti-agent.git ~/.openclaw/skills/mbti-agent
+```
+
+For project-local use:
+
+```bash
+mkdir -p .openclaw/skills
+git clone https://github.com/yungzyx/mbti-agent.git .openclaw/skills/mbti-agent
+```
+
+See `docs/install/openclaw.md` for configuration notes across different OpenClaw setups.
+
 ## Set a default MBTI type
 
 Add a short instruction to your user or project memory file. For Claude Code, this is commonly `CLAUDE.md`:
@@ -103,6 +139,9 @@ mbti-agent/
 ├── MBTI_AGENT_SKILL.md            # human-facing master specification
 ├── README.md                      # installation and project overview
 ├── CONTRIBUTING.md                # open-source contribution guide
+├── SECURITY.md                    # privacy and secret-reporting policy
+├── CODE_OF_CONDUCT.md             # contribution behavior expectations
+├── CHANGELOG.md                   # release history and unreleased changes
 ├── LICENSE.md                     # MIT license
 ├── scripts/
 │   └── validate_repo.py           # schema, stack, hygiene, and secret checks
@@ -124,9 +163,15 @@ mbti-agent/
 ├── examples/
 │   ├── prompt-examples.md
 │   └── test-cases.md
+├── tests/
+│   └── fixtures/                  # behavioral evaluation scenarios
 └── docs/
     ├── behavior-schema.md
+    ├── behavioral-fixtures.md
     ├── cognitive-functions.md
+    ├── install/                   # Claude Code, Codex, Hermes, OpenClaw setup
+    ├── profile-index.md
+    ├── profile-quality-rubric.md
     ├── roadmap.md
     └── evaluation.md
 ```
@@ -158,6 +203,7 @@ The validator checks:
 - `SKILL.md` frontmatter and dispatch sections
 - all 16 type profiles and their cognitive function stacks
 - all overlay files and required sections
+- behavioral fixture structure
 - placeholder/template leftovers
 - obvious secrets, local paths, and private-key patterns
 
@@ -165,11 +211,11 @@ GitHub Actions runs the same check on every push and pull request.
 
 ## Roadmap
 
-- v1.0: Complete all 16 type profiles, overlays, docs, examples, MIT license, validation script, and CI
+- v1.0: Complete all 16 type profiles, overlays, docs, examples, MIT license, validation script, CI, and behavioral fixtures
 - v1.1: Add community-calibrated examples for each type and task mode
-- v1.2: Expand validation with link checks and profile-length guidance
+- v1.2: Expand validation with link checks, profile-length guidance, and fixture coverage scoring
 - v2.0: Add optional non-MBTI trait mapping for users who prefer Big Five-style dimensions
-- v2.1: Add runtime-specific calibration notes for Claude Code and Codex
+- v2.1: Add deeper runtime-specific calibration notes for Claude Code, Codex, Hermes Agent, and OpenClaw
 
 ## License
 

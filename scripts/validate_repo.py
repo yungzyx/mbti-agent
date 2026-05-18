@@ -33,15 +33,30 @@ REQUIRED_ROOT_FILES = [
 
 REQUIRED_DOCS = [
     "docs/behavior-schema.md",
+    "docs/behavioral-fixtures.md",
     "docs/cognitive-functions.md",
     "docs/evaluation.md",
+    "docs/profile-index.md",
+    "docs/profile-quality-rubric.md",
     "docs/roadmap.md",
+    "docs/install/claude-code.md",
+    "docs/install/codex.md",
+    "docs/install/hermes-agent.md",
+    "docs/install/openclaw.md",
 ]
 
 REQUIRED_EXAMPLES = [
     "examples/prompt-examples.md",
     "examples/test-cases.md",
 ]
+
+REQUIRED_TRUST_FILES = [
+    "SECURITY.md",
+    "CODE_OF_CONDUCT.md",
+    "CHANGELOG.md",
+]
+
+MIN_BEHAVIORAL_FIXTURES = 6
 
 TYPE_REQUIRED_SECTIONS = [
     "## Function stack",
@@ -65,6 +80,15 @@ OVERLAY_REQUIRED_SECTIONS = [
     "## Behavior dimensions modified",
     "## How it combines with the base type",
     "## Examples of behavior changes",
+]
+
+FIXTURE_REQUIRED_SECTIONS = [
+    "## Scenario",
+    "## Active profile",
+    "## User prompt",
+    "## Expected behavior",
+    "## Must avoid",
+    "## Review checklist",
 ]
 
 FUNCTIONS = {"Ni", "Ne", "Si", "Se", "Te", "Ti", "Fe", "Fi"}
@@ -132,7 +156,7 @@ def fail(errors: list[str], message: str) -> None:
 
 
 def check_required_files(errors: list[str]) -> None:
-    required = list(REQUIRED_ROOT_FILES) + REQUIRED_DOCS + REQUIRED_EXAMPLES
+    required = list(REQUIRED_ROOT_FILES) + REQUIRED_DOCS + REQUIRED_EXAMPLES + REQUIRED_TRUST_FILES
     required += [f"references/{type_name}.md" for type_name in TYPES]
     required += [f"overlays/{overlay}.md" for overlay in OVERLAYS]
     for file_name in required:
@@ -203,6 +227,35 @@ def check_overlays(errors: list[str]) -> None:
             fail(errors, f"{rel(path)} must explain how it combines with the base type")
 
 
+
+
+def check_behavioral_fixtures(errors: list[str]) -> None:
+    fixture_dir = ROOT / "tests" / "fixtures"
+    if not fixture_dir.is_dir():
+        fail(errors, "missing behavioral fixture directory: tests/fixtures")
+        return
+
+    fixture_files = sorted(path for path in fixture_dir.glob("*.md") if path.name != "README.md")
+    if len(fixture_files) < MIN_BEHAVIORAL_FIXTURES:
+        fail(errors, f"expected at least {MIN_BEHAVIORAL_FIXTURES} behavioral fixtures, found {len(fixture_files)}")
+
+    for path in fixture_files:
+        content = text(path)
+        if not content.startswith("# Fixture:"):
+            fail(errors, f"{rel(path)} title must start with '# Fixture:'")
+        for section in FIXTURE_REQUIRED_SECTIONS:
+            if section not in content:
+                fail(errors, f"{rel(path)} missing section {section}")
+        if "- Type:" not in content:
+            fail(errors, f"{rel(path)} must declare '- Type:' under Active profile")
+        if "- Overlay:" not in content:
+            fail(errors, f"{rel(path)} must declare '- Overlay:' under Active profile")
+        if "workflow behavior" not in content.lower():
+            fail(errors, f"{rel(path)} should explicitly evaluate workflow behavior")
+        if "roleplay" not in content.lower():
+            fail(errors, f"{rel(path)} should explicitly reject roleplay language")
+
+
 def iter_repo_text_files() -> list[Path]:
     paths: list[Path] = []
     for path in ROOT.rglob("*"):
@@ -244,6 +297,7 @@ def main() -> int:
     check_skill_file(errors)
     check_type_profiles(errors)
     check_overlays(errors)
+    check_behavioral_fixtures(errors)
     check_sensitive_content(errors)
     check_placeholders(errors)
 
@@ -253,8 +307,9 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
+    fixture_count = len([path for path in (ROOT / "tests" / "fixtures").glob("*.md") if path.name != "README.md"])
     print("mbti-agent validation passed")
-    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, and repository hygiene checks")
+    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, {fixture_count} behavioral fixtures, and repository hygiene checks")
     return 0
 
 
