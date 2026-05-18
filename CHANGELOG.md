@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add stronger trademark, affiliation, non-assessment, and proprietary-content safeguards.
+- Add workflow-based profile picker and comparison docs for close profile pairs.
 - Add behavioral fixtures for profile and overlay evaluation.
 - Add validator checks for fixture structure.
 - Add install and configuration docs for Hermes Agent and OpenClaw.

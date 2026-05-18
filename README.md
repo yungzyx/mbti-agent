@@ -104,6 +104,18 @@ git clone https://github.com/yungzyx/mbti-agent.git .openclaw/skills/mbti-agent
 
 See `docs/install/openclaw.md` for configuration notes across different OpenClaw setups.
 
+## Choose a profile
+
+If you already know the type code you want, set it directly. If you are unsure, use the workflow-based picker instead of taking or replacing any personality assessment:
+
+- `docs/choose-your-profile.md`
+- `docs/type-comparisons/INTJ-vs-INTP.md`
+- `docs/type-comparisons/ENTJ-vs-ESTJ.md`
+- `docs/type-comparisons/ENFP-vs-ENTP.md`
+- `docs/type-comparisons/ISTP-vs-ESTP.md`
+
+These docs compare coding collaboration behavior only: planning, debugging, review, check-ins, explanation depth, and convergence style.
+
 ## Set a default type profile
 
 Add a short instruction to your user or project memory file. For Claude Code, this is commonly `CLAUDE.md`:
@@ -170,11 +182,13 @@ mbti-agent/
 │   └── test-cases.md
 ├── tests/
 │   └── fixtures/                  # behavioral evaluation scenarios
-└── docs/
+├── docs/
     ├── behavior-schema.md
     ├── behavioral-fixtures.md
+    ├── choose-your-profile.md
     ├── cognitive-functions.md
     ├── install/                   # Claude Code, Codex, Hermes, OpenClaw setup
+    ├── type-comparisons/          # workflow comparisons for close profiles
     ├── profile-index.md
     ├── profile-quality-rubric.md
     ├── roadmap.md
@@ -209,6 +223,7 @@ The validator checks:
 - all 16 type profiles and their cognitive function stacks
 - all overlay files and required sections
 - behavioral fixture structure
+- profile picker and type comparison docs
 - placeholder/template leftovers
 - obvious secrets, local paths, and private-key patterns
 
@@ -217,8 +232,8 @@ GitHub Actions runs the same check on every push and pull request.
 ## Roadmap
 
 - v1.0: Complete all 16 type profiles, overlays, docs, examples, MIT license, validation script, CI, and behavioral fixtures
-- v1.1: Add community-calibrated examples for each type and task mode
-- v1.2: Expand validation with link checks, profile-length guidance, and fixture coverage scoring
+- v1.1: Add community-calibrated examples, workflow profile picker, and comparison docs for close profile pairs
+- v1.2: Expand validation with link checks, profile-length guidance, fixture coverage scoring, and more comparison docs
 - v2.0: Add optional non-type-code trait mapping for users who prefer Big Five-style dimensions
 - v2.1: Add deeper runtime-specific calibration notes for Claude Code, Codex, Hermes Agent, and OpenClaw
 

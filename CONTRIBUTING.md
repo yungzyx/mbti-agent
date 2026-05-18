@@ -20,6 +20,8 @@ Common contribution targets:
 - `tests/fixtures/*.md`: behavioral fixtures for repeatable profile and overlay review
 - `docs/profile-quality-rubric.md`: quality bar for profile changes
 - `docs/profile-index.md`: quick comparison table for all profiles
+- `docs/choose-your-profile.md`: workflow-based picker that avoids assessment claims
+- `docs/type-comparisons/*.md`: close-profile workflow comparisons
 - `docs/cognitive-functions.md`: function-stack rationale
 - `docs/evaluation.md`: ways to judge whether a profile is useful
 
@@ -69,7 +71,7 @@ Before opening a PR, run the automated validator:
 python scripts/validate_repo.py
 ```
 
-The validator checks required files, profile sections, function stacks, overlays, behavioral fixture structure, placeholder leftovers, and obvious secret patterns. GitHub Actions runs the same command on pull requests.
+The validator checks required files, profile sections, function stacks, overlays, behavioral fixture structure, profile picker/comparison docs, trademark safeguards, placeholder leftovers, and obvious secret patterns. GitHub Actions runs the same command on pull requests.
 
 For behavior changes, also run a small manual evaluation with at least two task modes. Use prompts from `examples/test-cases.md`, use an existing fixture in `tests/fixtures/`, or add a new fixture when the change covers a gap.
 

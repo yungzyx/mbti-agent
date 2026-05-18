@@ -34,6 +34,7 @@ REQUIRED_ROOT_FILES = [
 REQUIRED_DOCS = [
     "docs/behavior-schema.md",
     "docs/behavioral-fixtures.md",
+    "docs/choose-your-profile.md",
     "docs/cognitive-functions.md",
     "docs/evaluation.md",
     "docs/profile-index.md",
@@ -43,6 +44,13 @@ REQUIRED_DOCS = [
     "docs/install/codex.md",
     "docs/install/hermes-agent.md",
     "docs/install/openclaw.md",
+]
+
+REQUIRED_COMPARISON_DOCS = [
+    "docs/type-comparisons/INTJ-vs-INTP.md",
+    "docs/type-comparisons/ENTJ-vs-ESTJ.md",
+    "docs/type-comparisons/ENFP-vs-ENTP.md",
+    "docs/type-comparisons/ISTP-vs-ESTP.md",
 ]
 
 REQUIRED_EXAMPLES = [
@@ -166,7 +174,7 @@ def fail(errors: list[str], message: str) -> None:
 
 
 def check_required_files(errors: list[str]) -> None:
-    required = list(REQUIRED_ROOT_FILES) + REQUIRED_DOCS + REQUIRED_EXAMPLES + REQUIRED_TRUST_FILES
+    required = list(REQUIRED_ROOT_FILES) + REQUIRED_DOCS + REQUIRED_COMPARISON_DOCS + REQUIRED_EXAMPLES + REQUIRED_TRUST_FILES
     required += [f"references/{type_name}.md" for type_name in TYPES]
     required += [f"overlays/{overlay}.md" for overlay in OVERLAYS]
     for file_name in required:
@@ -281,6 +289,44 @@ def iter_repo_text_files() -> list[Path]:
     return paths
 
 
+def check_profile_picker(errors: list[str]) -> None:
+    path = ROOT / "docs" / "choose-your-profile.md"
+    if not path.is_file():
+        return
+    content = text(path)
+    for phrase in [
+        "not a test, diagnosis, or official type interpretation",
+        "workflow preference picker",
+        "reversible default",
+        "Do not infer a profile",
+        "## Fast picker",
+        "## Recommended prompts",
+    ]:
+        if phrase not in content:
+            fail(errors, f"{rel(path)} missing picker-safety phrase or section: {phrase!r}")
+
+
+def check_comparison_docs(errors: list[str]) -> None:
+    for file_name in REQUIRED_COMPARISON_DOCS:
+        path = ROOT / file_name
+        if not path.is_file():
+            continue
+        content = text(path)
+        stem = path.stem
+        if not content.startswith(f"# {stem.replace('-', ' ')}"):
+            fail(errors, f"{file_name} title should match comparison name")
+        for section in ["## Quick choice", "## Planning difference", "## Debugging difference", "## Code review difference", "## Risk if misapplied", "## Test prompt"]:
+            if section not in content:
+                fail(errors, f"{file_name} missing section {section}")
+        if "This is not a personality assessment" not in content:
+            fail(errors, f"{file_name} must include non-assessment disclaimer")
+        types = stem.split("-vs-")
+        if len(types) == 2:
+            for type_name in types:
+                if type_name not in content:
+                    fail(errors, f"{file_name} should mention {type_name}")
+
+
 def check_trademark_safety(errors: list[str]) -> None:
     notice_path = ROOT / "NOTICE.md"
     readme_path = ROOT / "README.md"
@@ -332,6 +378,8 @@ def main() -> int:
     check_type_profiles(errors)
     check_overlays(errors)
     check_behavioral_fixtures(errors)
+    check_profile_picker(errors)
+    check_comparison_docs(errors)
     check_trademark_safety(errors)
     check_sensitive_content(errors)
     check_placeholders(errors)
@@ -344,7 +392,7 @@ def main() -> int:
 
     fixture_count = len([path for path in (ROOT / "tests" / "fixtures").glob("*.md") if path.name != "README.md"])
     print("mbti-agent validation passed")
-    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, {fixture_count} behavioral fixtures, trademark safeguards, and repository hygiene checks")
+    print(f"validated {len(TYPES)} type profiles, {len(OVERLAYS)} overlays, {fixture_count} behavioral fixtures, {len(REQUIRED_COMPARISON_DOCS)} comparison docs, trademark safeguards, and repository hygiene checks")
     return 0
 
 

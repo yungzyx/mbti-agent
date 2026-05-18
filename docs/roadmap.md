@@ -12,11 +12,13 @@
 - Add behavioral fixtures so profile quality can be reviewed against realistic coding tasks
 - Add install and configuration docs for Claude Code, Codex, Hermes Agent, and OpenClaw
 - Add security policy, code of conduct, profile index, and profile quality rubric
+- Add workflow-based profile picker and initial comparison docs for close profile pairs
 
 ## v1.1
 
 - Add richer per-type examples for each task mode
-- Add before/after examples showing behavior differences between similar types
+- Add more before/after examples showing behavior differences between similar types
+- Expand comparison docs beyond the first four close profile pairs
 - Add maintainer review checklist for cognitive-function rationale
 - Expand behavioral fixtures to cover every type and every overlay at least once
 
